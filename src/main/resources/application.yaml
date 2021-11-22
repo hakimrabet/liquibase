@@ -1,0 +1,30 @@
+server:
+  servlet:
+    context-path: /liquibase
+  port: 8080
+logging:
+  level:
+    "liquibase" : debug
+---
+spring:
+  application:
+    name: liquibase
+  datasource:
+    url: jdbc:postgresql://127.0.0.1/liquibase
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+  liquibase:
+    parameters:
+      textColumnType: VARCHAR(250)
+    contexts: nonprod
+    change-log: db/changelog/db.changelog.yaml
+    enabled: true
+    url: jdbc:postgresql://127.0.0.1/liquibase
+    user: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  h2:
+    console:
+      enabled: true

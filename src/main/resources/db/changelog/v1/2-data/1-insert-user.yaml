@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - preConditions:
+      onFail: HALT
+      onError: HALT
+  - changeSet:
+      id: load-update-data
+      labels: example
+      author: ali
+      changes:
+        - loadUpdateData:
+            tableName: user_details
+            usePreparedStatements: true
+            separator: ','
+            relativeToChangelogFile: true
+            file: users.csv
+            encoding: UTF-8
+            quotchar:  ''''
+            primaryKey: id
+            columns:
+              - column:
+                  header: id
+                  name:   id
+                  type:   BIGINT
+              - column:
+                  header: username
+                  name:   username
+                  type:   ${textColumnType}
+              - column:
+                  header: first_name
+                  name:   first_name
+                  type:   ${textColumnType}
+              - column:
+                  header: last_name
+                  name:   last_name
+                  type:   ${textColumnType}
